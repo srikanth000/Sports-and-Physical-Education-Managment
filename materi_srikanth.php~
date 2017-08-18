@@ -1,0 +1,367 @@
+<?php
+                
+              	session_start();
+		mysql_connect("localhost","root","");
+	        $db=mysql_select_db("se");
+		
+		
+		//session_start();
+				//echo $q[0];
+		//$_SESSION['user']
+		if(isset($_POST['login']))
+		{
+			//echo "sdf";
+			
+			$user=$_POST['usrname'];
+			$pwd=$_POST['psw'];
+			$q1=mysql_query("select * from signup where UID='$user'  and password='$pwd'");
+			$q=mysql_fetch_array($q1);
+			//echo $q1;
+		
+			if($q1>0)//if($q[3]==$user && $q[5]==$pwd)
+			{
+				//session_start();
+				echo $q[0];
+				$_SESSION['user'] =$q[3];	
+				
+				//header('Location:materials.php'); 
+			}
+			else
+			{
+				
+				echo "failed";
+				session_destroy();
+				echo '<script language="javascript">';
+				echo 'alert("username or pwd wrong")';
+				//header('Location:index.php'); 
+			
+			}
+		}
+		
+?>
+
+<html>
+<head lang="en">
+    	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+    	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+   	  <script src="lib/jquery/jquery-2.2.4.min.js"></script>
+	<link rel="stylesheet" href="css/w3.css">	
+
+	<link rel="stylesheet" href="css/.css">
+	 <script src="lib/jquery/jssor.slider.mini.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<!--Semantic Ui!-->
+		
+
+  <!--- Component CSS -->
+ 
+  <link rel="stylesheet" type="text/css" href="dist/components/button.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/card.css">
+ 
+<link rel="stylesheet" type="text/css" href="dist/components/segment.css">
+  
+
+  <!--- Component JS -->
+  
+  
+  <script type="text/javascript" src="dist/components/transition.js"></script>
+
+  <!--- Show Names -->
+
+	<link rel="stylesheet" href="css/w3.css">
+ <script>
+  $(document)
+    .ready(function() {
+      $('.special.card .image').dimmer({
+        on: 'hover'
+      });
+      $('.star.rating')
+        .rating()
+      ;
+      $('.card .dimmer')
+        .dimmer({
+          on: 'hover'
+        })
+      ;
+    })
+  ;
+  </script>
+   	 <title></title>
+<style>
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+ 
+  .spaced > .button {
+    margin-bottom: 1em;
+  }
+
+    /* entire container, keeps perspective */
+.flip-container {
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+}
+    /* flip the pane when hovered */
+    .flip-container:hover .flipper, .flip-container.hover .flipper {
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        -o-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+.flip-container, .front, .back {
+    width: 200px;
+    height: 200px;
+	  border-radius: 15px;
+		
+}
+/* flip speed goes here */
+.flipper {
+    -webkit-transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transition: 0.6s;
+    -moz-transform-style: preserve-3d;
+    -o-transition: 0.6s;
+    -o-transform-style: preserve-3d;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+/* hide back of pane during swap */
+.front, .back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    background-color: #ccc;
+}
+/* front pane, placed above back */
+.front {
+    z-index: 2;
+	background-color:#00FFFF;
+border-style: solid;
+    border-color: black;
+	
+}
+/* back, initially hidden pane */
+.back {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(360deg);
+    transform: rotateY(180deg);
+	background-color:#E6E6FA;
+	  border-radius: 25px;
+
+}
+#title {
+    width_auto;
+height_auto;
+}
+ .fixnav{
+position:fixed;
+top:0;
+z-index:12; 
+ }
+@media screen and (max-width: 768px) {
+    h1{
+        font-size:25px;
+    }
+}
+#menu
+{
+	 width: 100%; text-align: center;
+}
+</style>
+</head>
+<body>
+<header role="banner" id="top">
+<div id="header-text">
+   <center><h1 id="title">Sports & Physical Education</h1></center>
+</div>
+<div id="menu" class="w3-center">
+<nav class="navbar navbar-inverse ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <!--<a class="navbar-brand" href="#">Logo</a>!-->
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="index.php">Home</a></li>
+        <li><a href="#">Sports</a></li>
+        <li  class="active"><a href="materials.html">Materials</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Physical Edu.</a></li>
+ <li><a href="#">e-Complaint</a></li>
+        <li><a href="#">Contact Us</a></li>
+     
+ 
+
+<style type="text/css">
+.select-boxes{width: 280px;text-align: center;}
+select {
+    background-color: #F5F5F5;
+    border: 1px double #FB4314;
+    color: #55BB91;
+    font-family: Georgia;
+    font-weight: bold;
+    font-size: 14px;
+    height: 39px;
+    padding: 7px 8px;
+    width: 250px;
+    outline: none;
+    margin: 10px 0 10px 0;
+}
+select option{
+    font-family: Georgia;
+    font-size: 14px;
+}
+</style>
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#country').on('change',function(){
+        var countryID = $(this).val();
+        if(countryID){
+            $.ajax({
+                type:'POST',
+                url:'ajaxData.php',
+                data:'country_id='+countryID,
+                success:function(html){
+                    $('#state').html(html);
+                    $('#city').html('<option value="">Select state first</option>'); 
+                }
+            }); 
+        }else{
+            $('#state').html('<option value="">Select country first</option>');
+            $('#city').html('<option value="">Select state first</option>'); 
+        }
+    });
+    
+    $('#state').on('change',function(){
+        var stateID = $(this).val();
+        if(stateID){
+            $.ajax({
+                type:'POST',
+                url:'ajaxData.php',
+                data:'state_id='+stateID,
+                success:function(html){
+                    $('#city').html(html);
+                }
+            }); 
+        }else{
+            $('#city').html('<option value="">Select state first</option>'); 
+        }
+    });
+});
+</script>
+</head>
+<body>
+    <div class="select-boxes">
+    <?php
+    //Include database configuration file
+    include('dbConfig.php');
+    
+    //Get all country data
+    $query = $db->query("SELECT * FROM countries WHERE status = 1 ORDER BY country_name ASC");
+    
+    //Count total number of rows
+    $rowCount = $query->num_rows;
+    ?>
+    <select name="country" id="country">
+        <option value="">Select Sports</option>
+        <?php
+        if($rowCount > 0){
+            while($row = $query->fetch_assoc()){ 
+                echo '<option value="'.$row['country_id'].'">'.$row['country_name'].'</option>';
+            }
+        }else{
+            echo '<option value="">Country not available</option>';
+        }
+        ?>
+    </select>
+    
+    <select name="state" id="state">
+        <option value="">Select Sport Item</option>
+    </select>
+    
+    <select name="city" id="city">
+        <option value="">Avilability of Material</option>
+    </select>
+    </div>
+
+<br>
+<br>
+<br>
+<footer class="container-fluid text-center">
+
+  
+  <form class="form-inline">Get Event Updates
+    <input type="email" class="form-control" size="50" placeholder="Email Address">
+    <button type="button" class="btn btn-danger">Sign Up</button>
+	<p>Sports & Physical Edu. Copyright</p>  
+  </form>
+</footer>
+<script>
+
+$(window).scroll(function ()
+
+    {     
+        if ( $(window).scrollTop() > 120)
+        {
+            $("#menu").addClass("fixnav");
+        }
+        else  if ($(window).scrollTop() < 200)
+        {
+            $("#menu").removeClass("fixnav");
+        }
+    });
+$('.content').on('click', function () {
+    $('.content').transition({
+        animation: 'jiggle',
+        duration: 500,
+        useFailSafe: true,
+        allowRepeats: false,
+        queue : false
+    });
+});
+
+
+</script>
+</body>
+</html>
+<!-- Mirrored from www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 13 Mar 2016 11:05:00 GMT --!
+  <li> <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black w3-medium"><span class="glyphicon glyphicon-log-in"></span>Login</button></li>>
+
+</html>
+
+</body>
+</html>

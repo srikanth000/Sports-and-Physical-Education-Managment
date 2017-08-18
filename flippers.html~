@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>CSS Flip</title>
+  
+    	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+    	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+   	 <script src="lib/jquery/jquery-2.2.4.min.js"></script>
+	<link rel="stylesheet" href="css/w3.css">
+	 <script src="lib/jquery/jssor.slider.mini.js"></script>
+	<!--Semantic Ui!-->
+		<link rel="stylesheet" type="text/css" href="dist/components/reset.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/site.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/grid.css">
+
+  <!--- Component CSS -->
+  <link rel="stylesheet" type="text/css" href="dist/components/icon.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/button.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/card.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/label.css">
+<link rel="stylesheet" type="text/css" href="dist/components/segment.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/image.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/reveal.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/dimmer.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/rating.css">
+  <link rel="stylesheet" type="text/css" href=".dist/components/transition.css">
+  <link rel="stylesheet" type="text/css" href="dist/components/popup.css">
+
+  <!--- Component JS -->
+  <script src="../assets/library/jquery.min.js"></script>
+  <script src="../assets/library/iframe-content.js"></script>
+  <script type="text/javascript" src="dist/components/popup.js"></script>
+  <script type="text/javascript" src="dist/components/dimmer.js"></script>
+  <script type="text/javascript" src="dist/components/rating.js"></script>
+  <script type="text/javascript" src="dist/components/transition.js"></script>
+
+  <!--- Show Names -->
+  <script src="../assets/show-examples.js"></script>
+ <script>
+  $(document)
+    .ready(function() {
+      $('.special.card .image').dimmer({
+        on: 'hover'
+      });
+      $('.star.rating')
+        .rating()
+      ;
+      $('.card .dimmer')
+        .dimmer({
+          on: 'hover'
+        })
+      ;
+    })
+  ;
+  </script>
+<style>
+ body {
+    padding: 1em;
+  }
+  .spaced > .button {
+    margin-bottom: 1em;
+  }
+
+    /* entire container, keeps perspective */
+.flip-container {
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+}
+    /* flip the pane when hovered */
+    .flip-container:hover .flipper, .flip-container.hover .flipper {
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        -o-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+.flip-container, .front, .back {
+    width: 200px;
+    height: 200px;
+	  border-radius: 12px;
+		
+}
+/* flip speed goes here */
+.flipper {
+    -webkit-transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transition: 0.6s;
+    -moz-transform-style: preserve-3d;
+    -o-transition: 0.6s;
+    -o-transform-style: preserve-3d;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+/* hide back of pane during swap */
+.front, .back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    background-color: #ccc;
+}
+/* front pane, placed above back */
+.front {
+    z-index: 2;
+	background-color:#00FFFF;
+}
+/* back, initially hidden pane */
+.back {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+	background-color:#E6E6FA;
+}
+  </style>
+</head>
+<body>
+  <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+    <div class="flipper">
+        <div class="front">
+           
+        </div>
+        <div class="back">
+		<!--<center>
+		<div class="ui inverted segment">
+		<button class="ui inverted blue basic button">Basic Colored</button>
+		</div>
+		<div class="ui inverted segment">
+		<button class="ui inverted blue basic button">Basic Colored</button>
+		</div>
+		<div class="ui inverted segment">
+		<button class="ui inverted blue basic button">Basic Colored</button>
+		</div>
+		</center>
+			--!>
+		
+            <!-- back content -->
+		<center>
+    		 <div class="ui inverted segment">
+    				<button class="ui inverted blue button">Show Availble</button><br>
+    		</div>
+		<div class="ui inverted segment">
+    				<button class="ui inverted blue button">Request Material</button><br>
+    		</div>
+		<div class="ui inverted segment">
+    				<button class="ui inverted blue button">Submission</button><br>
+    		</div>
+		</center>
+	</div>
+	</div>
+</div>
+</body>
+</html>

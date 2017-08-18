@@ -1,0 +1,202 @@
+<?php
+                
+      $dbHost = 'localhost';
+$dbUsername = 'root';
+$dbPassword = '';
+$dbName = 'se';
+
+//Connect and select the database
+$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
+
+if ($db->connect_error) {
+    die("Connection faied: " . $db->connect_error);
+}
+if(isset($_GET['id']))
+{
+	$s=$_GET['id'];
+	
+	
+}
+		
+?>
+<html>
+    <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    
+	<script src="js/main.js"></script>
+    	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+   	 <script src="lib/jquery/jquery-2.2.4.min.js"></script>
+	<link rel="stylesheet" href="css/w3.css">
+	 <script src="lib/jquery/jssor.slider.mini.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+		<script src="lib/bootstrap/js/bootstrap.js"></script>
+	<!--Semantic Ui!-->
+		
+   	 <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Always force latest IE rendering engine -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Meta Keyword -->
+        <meta name="keywords" content="one page, business template, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
+        <!-- meta character set -->
+        <meta charset="utf-8">
+
+        <!-- Site Title -->
+        <title>Kasper One Page Template</title>
+        
+        <!--
+        Google Fonts
+        ============================================= -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
+		
+        <!--
+        CSS
+        ============================================= -->
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="css/css1/font-awesome.min.css">
+        <!-- Bootstrap -->
+        
+        <link rel="stylesheet" href="css/css1/jquery.fancybox.css">
+        <!-- owl carousel -->
+        <link rel="stylesheet" href="css/css1/owl.carousel.css">
+        <!-- Animate -->
+        <link rel="stylesheet" href="css/css1/animate.css">
+        <!-- Main Stylesheet -->
+        <link rel="stylesheet" href="css/css1/main.css">
+        <!-- Main Responsive -->
+        
+        <link rel="stylesheet" type="text/css" href="css/css1/default.css">
+        <link rel="stylesheet" type="text/css" href="css/css1/component.css">
+		
+		
+		<!-- Modernizer Script for old Browsers -->
+        <script src="js/js1/vendor/modernizr-2.6.2.min.js"></script>
+		
+<style>
+.new{
+
+border-radius:120px;
+
+}
+
+</style>
+    </head>
+	<body>
+		<?php include('header.php');?>
+        <!--
+        Home Slider
+        ==================================== -->
+	<?php
+		mysql_connect("localhost","root","");
+		mysql_select_db("se");
+		$user=mysql_query("select * from events ;");
+		
+		
+?>
+        <section id="home">     
+            <div id="home-carousel" class="carousel slide" data-interval="false">
+                <ol class="carousel-indicators">
+                    <li data-target="#home-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#home-carousel" data-slide-to="1"></li>
+                    <li data-target="#home-carousel" data-slide-to="2"></li>
+                </ol>
+                <!--/.carousel-indicators-->
+		
+                <div class="carousel-inner">
+		<?php 
+			while($u=mysql_fetch_array($user))
+			{
+		?>
+                    <div class="item active"  style="background-image: url('img/slider/bg1.jpg')" >
+                        <div class="carousel-caption">
+			
+                     <a  class="btn btn-1 btn-1e" href="EventR.php?id=<?php echo $u[0] ; ?>">Register</a>
+                                        <button class="btn btn-1 btn-1e pull-right">Starts on <?php echo $u[2] ; ?> </button>
+					
+                            <div class="animated bounceInRight">
+                                <h2><?php echo $u[1] ; ?><br><?php echo $u[4] ; ?>.</h2>
+                                <h6><?php echo $u[5] ; ?></h6>
+                            </div>
+                        </div>
+                    </div>   
+		
+		    <?php } ?>           
+
+                   <!-- <div class="item" style="background-image: url('img/slider/bg2.jpg')">                
+                        <div class="carousel-caption">
+                          <button class="btn btn-1 btn-1e">Register</button>
+                                        <button class="btn btn-1 btn-1e pull-right">Past Events</button>
+                            <div class="animated bounceInDown">
+                                <h2>CRICKET  <br>CSE vs  CIVIL.</h2>
+                                <p>The Match is on 5th april 2017 b/w the branceh CSE vs ECE .</p>
+                            </div>
+                        </div>
+                    </div>!-->
+
+                    <div class="item" style="background-image: url('img/slider/bg3.jpg')">                 
+                         <div class="carousel-caption">
+                           <button class="btn btn-1 btn-1e">Register</button>
+                                        <button class="btn btn-1 btn-1e pull-right">Complted</button>
+                            <div class="animated bounceInUp">
+                                <h2>BasketBall <br>CSE vs ECE.</h2>
+                                <p>The Match is on 5th april 2017 b/w the branceh CSE vs ECE .</p>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                    </div>
+                
+                </div>
+		
+                <!--/.carousel-inner-->
+                 
+                <nav id="nav-arrows" class="nav-arrows hidden-xs hidden-sm visible-md visible-lg">
+                    <a class="sl-next" href="#home-carousel" data-slide="prev">
+                        <i class="fa fa-angle-right fa-3x"></i>
+                    </a>
+                    <a class="sl-prev hidden-xs" href="#home-carousel" data-slide="next">
+                        <i class="fa fa-angle-left fa-3x"></i>
+                    </a>
+                </nav>
+
+            </div>
+        </section>
+        <!--
+        End #home Slider
+        ========================== -->
+        
+  
+
+        <!--
+        JavaScripts
+        ========================== -->
+        
+        <!-- main jQuery -->
+        <script src="js/js1/vendor/jquery-1.11.1.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="js/js1/bootstrap.min.js"></script>
+        <!-- jquery.nav -->
+        <script src="js/js1/jquery.nav.js"></script>
+        <!-- Portfolio Filtering -->
+        <script src="js/js1/jquery.mixitup.min.js"></script>
+        <!-- Fancybox -->
+        <script src="js/js1/jquery.fancybox.pack.js"></script>
+        <!-- Parallax sections -->
+        <script src="js/js1/jquery.parallax-1.1.3.js"></script>
+        <!-- jQuery Appear -->
+        <script src="js/js1/jquery.appear.js"></script>
+        <!-- countTo -->
+        <script src="js/js1/jquery-countTo.js"></script>
+        <!-- owl carousel -->
+        <script src="js/js1/owl.carousel.min.js"></script>
+        <!-- WOW script -->
+        <script src="js/js1/wow.min.js"></script>
+        <!-- theme custom scripts -->
+        <script src="js/js1/main.js"></script>
+	<?php include('footer.php');?>
+    </body>
+</html>

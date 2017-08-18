@@ -1,0 +1,63 @@
+
+CREATE TABLE IF NOT EXISTS `Sports` (
+  `Sid` int(11) NOT NULL,
+  `Sname` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0:Blocked, 1:Active'
+) ENGINE=InnoDB AUTO_INCREMENT=240 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `countries`
+--
+
+INSERT INTO `Sports` (`Id`, `Sname`, `status`) VALUES
+(1, 'Cricket', 1),
+(2, 'Volley Ball', 1),
+(3, 'FootBall', 1),
+(4, 'Badmintion', 1),
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `states`
+--
+
+CREATE TABLE IF NOT EXISTS `Games` (
+  `Number` int(11) NOT NULL,
+  `Item` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `Id` int(11) NOT NULL,
+  `GId` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0:Blocked, 1:Active'
+) ENGINE=InnoDB AUTO_INCREMENT=1652 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+
+--
+-- Dumping data for table `states`
+--
+
+INSERT INTO `Games` (`Gid`, `Item`, `Number`,`Id`, `status`) VALUES
+(1, 'Ball', 3, 1,1),
+(2, 'Bat', 4, 1,1),
+(3, 'Wickets', 5, 1,1),
+(4, 'Ball', 2,2, 1),
+(5, 'Volley Ball net',6, 2, 1),
+(6, 'Ball', 3,3, 1),
+(7, 'Bats Batmintion', 10,4, 1),
+--
+-- Indexes for dumped tables
+--
+
+---
+
+--
+-- Indexes for table `countries`
+--
+ALTER TABLE `Sports`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `states`
+--
+ALTER TABLE `Games`
+  ADD PRIMARY KEY (`Gid`);
+
+

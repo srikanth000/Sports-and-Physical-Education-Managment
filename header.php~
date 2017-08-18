@@ -1,0 +1,580 @@
+<html>
+<head lang="en">
+   
+	<!--Semantic Ui!-->
+		
+   	 <title></title>
+<style>
+.fixnav{
+position:fixed;
+top:0;
+z-index:12; 
+ }
+.fixnav2{
+position:fixed;
+top:3;
+z-index:12; 
+ }
+  .jumbotron {
+  margin-bottom: 0px;
+  height: -0px;
+  color:black;
+background-position: 0% 35%;
+background-color: black;
+    background-size: cover;
+    background-repeat: no-repeat;
+  
+ background:transparent;
+background:url('main1.jpeg') ;
+}
+#header-text{
+ margin-top: 0px;
+  height:70px;
+  border:2px solid;    
+padding:0px;
+ background-repeat: no-repeat;
+
+ }
+
+#title {
+    width_auto;
+height_auto;
+}
+ .fixnav{
+
+position:fixed;
+top:0;
+z-index:12;;   
+ }
+@media screen and (max-width: 768px) {
+    h1{
+        font-size:25px;
+    }
+}
+#menu
+{
+	 width: 100%; text-align: center;
+
+}
+
+
+</style>
+</head>
+<body>
+<header role="banner" id="top">
+<div id="header-text">
+   <center><h1 id="title">Sports & Physical Education</h1></center>
+         
+</div>
+<div id="menu" class="w3-center">
+<nav class="navbar navbar-inverse navbar-fixed">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar">SPP</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <!--<a class="navbar-brand" href="#">Logo</a>!-->
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+       <li class="<?php if(basename($_SERVER['SCRIPT_NAME']) == 'index.php'){echo 'active'; }else { echo ''; } ?>"><a href="index.php">Home</a></li>
+        <li class="<?php if(basename($_SERVER['SCRIPT_NAME']) == 'sports.php'){echo 'active'; }else { echo ''; } ?>"><a href="sports.php">Sports</a></li>
+         <li class="<?php if(basename($_SERVER['SCRIPT_NAME']) == 'materi.php'){echo 'active'; }else { echo ''; } ?>"><a href="materi.php">Materials</a></li>
+       <li class="<?php if(basename($_SERVER['SCRIPT_NAME']) == 'events.php'){echo 'active'; }else { echo ''; } ?>"><a href="events.php">Events</a></li>
+        <li><a href="phy_edu.php">Physical Edu.</a></li>
+	 <li class="<?php if(basename($_SERVER['SCRIPT_NAME']) == 'Secretary.php'){echo 'active'; }else { echo ''; } ?>"><a href="Secretary.php">Secretary Details</a></li>
+ <li><a href="e-complaint.php">e-Complaint</a></li>
+     
+	<?php
+		//session_start();
+		//echo $_SESSION['user'];
+		if(isset($_SESSION['user']))
+		{
+		if(!strcmp($_SESSION['user'],"admin"))
+		{
+			$u=$_SESSION['user'];
+			$q1=mysql_query("select * from signup where UID='$u'");
+			$q=mysql_fetch_array($q1);
+			if($q1>0)
+			{
+					echo ' <li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">'." ".$q[0]." ".$q[1].'
+				<span class="glyphicon glyphicon-user"></span></a>
+				<ul class="dropdown-menu">
+				  <li><a href="logout.php">logout</a></li>
+				  <li><a href="update.php">Update Profile</a></li>
+				 <li><a href="scomplaint.php">Show Complaints</a></li>
+				 <li><a href="materi1.php">Accept Material Requests</a></li>
+				  <li><a href="#">Profile</a></li> 
+				</ul>
+			      </li>';
+						
+			}
+		}
+		else
+		{
+			$u=$_SESSION['user'];
+			$q1=mysql_query("select * from signup where UID='$u'");
+			$q=mysql_fetch_array($q1);
+			if($q1>0)
+			{
+					echo ' <li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">'." ".$q[0]." ".$q[1].'
+				<span class="glyphicon glyphicon-user"></span></a>
+				<ul class="dropdown-menu">
+				  <li><a href="logout.php">logout</a></li>
+				  <li><a href="update.php">Update Profile</a></li>
+				  <li><a href="#">Profile</a></li> 
+				</ul>
+			      </li>';
+						
+			}
+		}
+	}
+		else
+		{
+		echo ' <li class="nav_button"><center> <button onclick="document.getElementById(\'id01\').style.display=\'block\'" class="w3-button w3-black w3-medium"><span class="glyphicon glyphicon-log-in"></span>Login</button></li>';
+		
+		}
+		
+		
+		
+		
+	?>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div id="id01" class="w3-modal">
+<script>
+$(document).ready(function(){
+  $(document).on('click', '.nav li a', function () {
+    console.log($(this));
+    $('.active').removeClass('active');
+    $(this).parent().addClass('active');
+  });
+});
+function idCheck(){
+
+    var id=document.getElementById('uid').value;
+
+    //alert(id.length);
+    if(id.length==""){
+        document.getElementById('id_error').innerHTML=" * Please enter student id";
+        return false;
+    }
+    else if(id.length!=7&&(id.charAt(0)!='B'||id.charAt(0)!='b')){
+      //  alert(id.charAt(0));
+
+        document.getElementById('id_error').innerHTML=" * Student id is invalid";
+        return false;
+    }
+    else{
+       // alert(id);
+        //alert(id.charAt(0));
+        //alert(id.charAt(0));
+        var i;
+        for(i=1;i<id.length;i++){
+                if(isNaN(id.charAt(i))){
+                    alert(id.charAt(i));
+                    document.getElementById('id_error').innerHTML=" *Student id is invalid";
+                    return false;
+                }
+        }
+        document.getElementById('id_error').innerHTML="";
+        return true;
+    }
+}
+function idCheck1(){
+
+    var id=document.getElementById('email').value;
+
+    //alert(id.length);
+    if(id.length==""){
+        document.getElementById('id_error1').innerHTML=" * Please enter student id";
+        return false;
+    }
+    else if(id.length!=7&&(id.charAt(0)!='B'||id.charAt(0)!='b')){
+      //  alert(id.charAt(0));
+
+        document.getElementById('id_error1').innerHTML=" * Student id is invalid";
+        return false;
+    }
+    else{
+       // alert(id);
+        //alert(id.charAt(0));
+        //alert(id.charAt(0));
+        var i;
+        for(i=1;i<id.length;i++){
+                if(isNaN(id.charAt(i))){
+                    alert(id.charAt(i));
+                    document.getElementById('id_error1').innerHTML=" *Student id is invalid";
+                    return false;
+                }
+        }
+        document.getElementById('id_error1').innerHTML="";
+        return true;
+    }
+}
+function checkfName(){
+    var fname=document.getElementById('fn').value;
+    if(fname==""){
+            document.getElementById('name_error').innerHTML=" * Please Enter your first name";
+            return false;
+    }
+    else if(!isNaN(fname)){
+        document.getElementById('name_error').innerHTML=" * Please enter corect name";
+        return false;
+    }
+    else{
+        document.getElementById('name_error').innerHTML="";
+        return true;
+    }
+}
+function checklName(){
+var name=document.getElementById('ln').value;
+    if(name.length==""){
+        document.getElementById('lname_error').innerHTML=" * Please enter your name";
+        return false;
+    }
+    else if(name.length<1||!isNaN(name)){
+        document.getElementById('lname_error').innerHTML=" * Please enter corect name";
+        return false;
+    }
+    else{
+            document.getElementById('lname_error').innerHTML="";
+            return true;
+    }
+}
+function checkPassword(){
+
+    var password=document.getElementById('pwd1').value;
+    if(password.length==""){
+        document.getElementById('pass_error').innerHTML=" * Please enter your password";
+        return false;
+    }
+    else if(password.length<8){
+        document.getElementById('pass_error').innerHTML=" * Your password should be atleast 8 characters";
+       return  false;
+    }
+    else{
+        document.getElementById('pass_error').innerHTML="";
+        return true;
+    }
+}
+function checkPassword1(){
+//alert("sdf");
+    var password=document.getElementById('pwd1').value;
+	var password1=document.getElementById('cpwd').value;
+    if(password.length==""){
+        document.getElementById('pass_error1').innerHTML=" * Please enter your password";
+        return false;
+    }
+    else if(password.localeCompare(password1)<0 || password.localeCompare(password1)>0){
+        document.getElementById('pass_error1').innerHTML=" * Confirm password and actual password doesnt match";
+       return false;
+    }
+    else{
+        document.getElementById('pass_error1').innerHTML="";
+        return true;
+    }
+}
+function checkEmail(){
+    var email=document.getElementById('emaill').value;
+	
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	
+    if (!filter.test(email)) {
+        document.getElementById("email_error").innerHTML = "* Please provide a valid email";
+        //mail.focus;
+	
+        // emailId.value = "";
+        //emailId.focus;
+        return false;
+    }
+    else{
+            document.getElementById('email_error').innerHTML="";
+        return true;
+    }
+}
+function checkValidation(){
+    if(idCheck()&&checkfName()&&checklName()&&checkEmail()&&checkPassword()) {
+        document.getElementById('submit_error').innerHTML="";
+        document.getElementById("signup").submit();
+    }
+    else{
+       // alert(checkPassId());
+        document.getElementById('submit_error').innerHTML=" * Please check your details";
+
+    }
+}
+</script>
+    <div class="w3-modal-content w3-card-4 w3-modal-content w3-animate-top" style="max-width:600px" id="model">
+	 <span onclick="document.getElementById('id01').style.display='none'" class="w3-closebtn w3-hover-red w3-container w3-padding-8 w3-display-topright" title="Close Modal">&times;</span>
+
+        <div class="row-fluid" id="demo-1">
+            <div class="span6 offset1" style="background-color:black" >
+           <!--   <h4 style="background-color:black">LogIn-Register</h4>!-->
+                <div class="tabbable custom-tabs tabs-animated  flat flat-all hide-label-980 shadow track-url auto-scroll">
+                    <ul class="nav nav-tabs" style="background-color:black">
+                        <li class="active"><a href="#panel1" data-toggle="tab" class="active "><i class="icon-lock"></i>&nbsp;<span style="color:white">Login</span></a></li>
+                        <li><a href="#panel2" data-toggle="tab"><i class="icon-user"></i>&nbsp;<span style="color:white">Register Panel</span></a></li>
+                        <li><a href="#panel3" data-toggle="tab"><i class="icon-key"></i>&nbsp;<span style="color:white">Forgot Password</span></a></li>
+                       
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active fade in" id="panel1">
+                            <div class="row-fluid">
+                                <div class="span10">
+				    <h3 style="color:white"><i class="icon-user"></i>&nbsp;&nbsp;Sign In</h4>
+				<div class="container">
+				<div class="row">
+				<br>
+				
+     		<div class="col-xs-6">
+                                   
+	
+				<form action="login.php" method="post">
+		
+    <div class="form-group" style="color:white" >
+      <label  class="w3-left">ID:</label>
+      <input type="text"  type="email" class="form-control" id="email" placeholder="Enter email" name="usrname" onblur="idCheck1()">
+	<span id="id_error1" style="color:red"></span><br>
+    </div>
+    <div class="form-group" style="color:white">
+      <label for="pwd" class="w3-left">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="psw" required="true" max-length="64" min-length="8">
+    </div>
+    <div class="checkbox" style="color:white">
+      <label><input type="checkbox"> Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-success" name="login">Submit</button>
+	
+  </form>
+	
+                                </div>    </div>    </div></div>
+				
+			
+                              
+                                
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="panel2">
+                            <div class="row-fluid">
+                                <div class="span10">
+                                    <h3 style="color:white"><i class="icon-user"></i>&nbsp;&nbsp; Register Here</h4>
+					<div class="container">
+				
+				
+				
+     		
+                                   
+	
+				<form action="signup.php" method="post" style="color:white" name="f2"  id="signup"  name="signup" >
+		<div class="row">
+	<div class="col-xs-3">
+		    <div class="form-group">
+		      <label  class="w3-left">FirstName</label>
+		      <input type="text" class="form-control" id="fn" placeholder="Enter FirstName" name="fn"  onblur="checkfName()">
+			<span id="name_error" style="color:red"></span><br>
+		    </div>
+	    <div class="form-group">
+	      <label  class="w3-left">Email</label>
+		<input type="text" class="form-control" id="emaill" placeholder="Enter email" name="email"  onblur="checkEmail()">
+	      <!--<input class="form-control" id="email"  type="text" name="email" placeholder="Enter your email" onblur="checkEmail()"!-->
+		 <span id="email_error"  style="color:red"></span><br>
+	    </div>
+		 <div class="form-group">
+	      <label for="pwd" class="w3-left">Password:</label>
+	      <input type="password" class="form-control" id="pwd1" placeholder="Enter password" name="psw" onblur="checkPassword()">
+		<span id="pass_error" style="color:red"></span><br>
+	    </div>
+		<div class="form-group">
+	      <label for="code" class="w3-left">Unique Code:</label>
+	      <input type="text" class="form-control" id="code" placeholder="must be remember" name="code">
+		<span id="pass_id_error"></span><br>
+	    </div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button type="button" class=" btn btn-xm btn-success" value="submit" onClick="checkValidation()">Submit</button>&nbsp;&nbsp;
+	 <span id="submit_error"></span>
+		 <button type="submit" class="btn btn-danger" name="reset" onclick="reset()">reset</button>
+	</div>
+	<div class="col-xs-3">
+		 <div class="form-group">
+	      <label for="pwd" class="w3-left">LatName</label>
+	      <input type="text" class="form-control" id="ln" placeholder="Enter lastName" name="ln"  onblur="checklName()">
+		<span id="lname_error" style="color:red"></span><br>
+	    </div>
+		 <div class="form-group">
+	      <label for="uidD" class="w3-left">University Id:</label>
+	      <input type="text" class="form-control" id="uid" placeholder="Enter UID" name="UID" onblur="idCheck()">
+		<span id="id_error" style="color:red"></span><br>
+	    </div>
+		<div class="form-group">
+	      <label for="cpwd" class="w3-left">Cofirm Password:</label>
+	      <input type="password" class="form-control" id="cpwd" placeholder="Enter confirm password" name="cpsw" onblur="checkPassword1()">
+		<span id="pass_error1" style="color:red"></span><br>
+	    </div>
+		
+	</div>
+	
+	<div class="row">
+	<div class="col-xm-1">
+   
+    
+	</div>
+	</div>
+  </form>
+	
+                                </div>    </div>    
+
+
+                                </div> 
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="panel3">
+                            <div class="row-fluid">
+                                <div class="span10">
+			<h3 style="color:white"><i class="icon-user"></i>&nbsp;&nbsp;Forgot Password</h4>
+                                    <div class="container">
+				<div class="row">
+				<br>
+				
+     		<div class="col-xs-6">
+                                   
+	
+				<form action="forgot.php" method="post">
+			 
+    <div class="form-group" style="color:white">
+      <label  class="w3-left">ID:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter email" name="id">
+    </div>
+    <div class="form-group" style="color:white">
+      <label for="pwd" class="w3-left">Enter Your Unique Number:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter uniyq " name="uid">
+    </div>
+    
+    <button type="submit" class="btn btn-success" name="forgot">Submit</button>
+  </form>
+	
+                                </div>    </div>    </div></div>
+                                </div>
+                                
+                            </div>
+
+
+                        </div>
+                        
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+	
+        </div>
+      <script src="jquery.js"></script>
+    <script src="bootstrap.js"></script>
+    <script src="tabs.js"></script>
+
+    <script type="text/javascript">
+        $(function ()
+        {
+            $("a[href^='#demo']").click(function (evt)
+            {
+                evt.preventDefault();
+                var scroll_to = $($(this).attr("href")).offset().top;
+                $("html,body").animate({ scrollTop: scroll_to - 80 }, 600);
+            });
+            $("a[href^='#bg']").click(function (evt)
+            {
+                evt.preventDefault();
+                $("body").removeClass("light").removeClass("dark").addClass($(this).data("class")).css("background-image", "url('bgs/" + $(this).data("file") + "')");
+                console.log($(this).data("file"));
+
+
+            });
+            $("a[href^='#color']").click(function (evt)
+            {
+                evt.preventDefault();
+                var elm = $(".tabbable");
+                elm.removeClass("grey").removeClass("dark").removeClass("dark-input").addClass($(this).data("class"));
+                if (elm.hasClass("dark dark-input"))
+                {
+                    $(".btn", elm).addClass("btn-inverse");
+                }
+                else
+                {
+                    $(".btn", elm).removeClass("btn-inverse");
+
+                }
+
+            });
+            $(".color-swatch div").each(function ()
+            {
+                $(this).css("background-color", $(this).data("color"));
+            });
+            $(".color-swatch div").click(function (evt)
+            {
+                evt.stopPropagation();
+                $("body").removeClass("light").removeClass("dark").addClass($(this).data("class")).css("background-color", $(this).data("color"));
+            });
+            $("#texture-check").mouseup(function (evt)
+            {
+                evt.preventDefault();
+
+                if (!$(this).hasClass("active"))
+                {
+                    $("body").css("background-image", "url(bgs/n1.png)");
+                }
+                else
+                {
+                    $("body").css("background-image", "none");
+                }
+            });
+
+            $("a[href='#']").click(function (evt)
+            {
+                evt.preventDefault();
+
+            });
+
+            $("a[data-toggle='popover']").popover({
+                trigger:"hover",html:true,placement:"top"
+            });
+        });
+$(function () {
+  $(".submit").click(function (e) {
+    $form = $(this).closest("form");
+    // Prevent Submission.
+    e.preventDefault();
+    // Fire AJAX to the path!
+    $.post("login.php", function (resp) {
+      // If user not found...
+      if (resp == "no")
+        $("#model").find(".modal-body").html("User not found!").end().modal("show");
+      else
+        $form.submit();
+    });
+  });
+});
+
+
+$(window).scroll(function ()
+
+    {     
+        if ( $(window).scrollTop() > 120)
+        {
+            $("#menu").addClass("fixnav");
+        }
+        else  if ($(window).scrollTop() < 200)
+        {
+            $("#menu").removeClass("fixnav");
+        }
+    });
+</script>
+    </script>
+
+</div>

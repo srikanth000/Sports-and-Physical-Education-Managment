@@ -1,0 +1,179 @@
+/**
+ * 
+ */
+function idCheck(){
+
+    var id=document.getElementById('uid').value;
+alert(""+id);
+    //alert(id.length);
+    if(id.length==""){
+        document.getElementById('id_error').innerHTML=" * Please enter student id";
+        return false;
+    }
+    else if(id.length!=7&&(id.charAt(0)!='B'||id.charAt(0)!='b')){
+      //  alert(id.charAt(0));
+
+        document.getElementById('id_error').innerHTML=" * Student id is invalid";
+        return false;
+    }
+    else{
+       // alert(id);
+        //alert(id.charAt(0));
+        //alert(id.charAt(0));
+        var i;
+        for(i=1;i<id.length;i++){
+                if(isNaN(id.charAt(i))){
+                    alert(id.charAt(i));
+                    document.getElementById('id_error').innerHTML=" *Student id is invalid";
+                    return false;
+                }
+        }
+        document.getElementById('id_error').innerHTML="";
+        return true;
+    }
+}
+function checkfName(){
+    var fname=document.getElementById('fname').value;
+    if(fname==""){
+            document.getElementById('name_error').innerHTML=" * Please Enter your first name";
+            return false;
+    }
+    else if(!isNaN(fname)){
+        document.getElementById('name_error').innerHTML=" * Please enter corect name";
+        return false;
+    }
+    else{
+        document.getElementById('name_error').innerHTML="";
+        return true;
+    }
+}
+function checklName(){
+var name=document.getElementById('lname').value;
+    if(name.length==""){
+        document.getElementById('lname_error').innerHTML=" * Please enter your name";
+        return false;
+    }
+    else if(name.length<3||!isNaN(name)){
+        document.getElementById('lname_error').innerHTML=" * Please enter corect name";
+        return false;
+    }
+    else{
+            document.getElementById('lname_error').innerHTML="";
+            return true;
+    }
+}
+function checkEmail(){
+    var email=document.getElementById('email').value;
+
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+    if (!filter.test(email)) {
+        document.getElementById("email_error").innerHTML = "* Please provide a valid email";
+        //mail.focus;
+        // emailId.value = "";
+        //emailId.focus;
+        return false;
+    }
+    else{
+            document.getElementById('email_error').innerHTML="";
+        return true;
+    }
+}
+function checkMobile(){
+    var number=document.getElementById('mobile').value;
+    if(number==""){
+        document.getElementById('mobile_error').innerHTML=" * Please enter your mobile number";
+        return false;
+    }
+    else if(isNaN(number)||(number.length!=10)){
+        document.getElementById('mobile_error').innerHTML=" * Please enter valid mobile number"
+        return false;
+    }
+    else{
+            document.getElementById('mobile_error').innerHTML="";
+        return true;
+    }
+}
+function genderCheck(){
+    var male=document.getElementById('male');//get total element
+    var  female=document.getElementById('female');
+    //alert(male);alert(female);
+    if(male.checked==true||female.checked==true)//checks whether radio button is clicked r not
+        return true;
+    return false;
+}
+function checkDate(){
+    var date=document.getElementById('dob').value;
+    if(date.length==""){
+        document.getElementById('dob_error').innerHTML=" * Please enter your date of birth";
+        return false;
+    }
+    else if(date.length!=10){
+        document.getElementById('dob_error').innerHTML=" * Please enter valid date";
+        return false;
+    }
+    else{
+        var i;
+        var char;
+        for(i=0;i<date.length;i++){
+            if(i==2||i==5){
+                if(date.charAt(i)!='/'){
+                    document.getElementById('dob_error').innerHTML=" * Please enter valid date";return false;
+                }
+
+            }
+            else{
+                if(isNaN(date.charAt(i))){
+                    document.getElementById('dob_error').innerHTML=" * Please enter valid date";
+                    return false;
+                }
+            }
+        }
+        document.getElementById('dob_error').innerHTML="";
+        return true;
+    }
+}
+function checkPassword(){
+    var password=document.getElementById('pwd').value;
+    if(password.length==""){
+        document.getElementById('pass_error').innerHTML=" * Please enter your password";
+        false;
+    }
+    else if(password.length<8){
+        document.getElementById('pass_error').innerHTML=" * Your password should be atleast 8 characters";
+        false;
+    }
+    else{
+        document.getElementById('pass_error').innerHTML="";
+        return true;
+    }
+}
+function checkPassId(){
+    var passId=document.getElementById('pwd').value;
+   //alert(passId.length);
+    if(passId.length==""){
+        document.getElementById('pass_id_error').innerHTML=" * Please enter your password id";
+        return false;
+    }
+    else if(passId.length<3){
+        document.getElementById('pass_id_error').innerHTML=" * Your password id should be atleast 4 charecters";
+        false;
+    }
+    else{
+        document.getElementById('pass_id_error').innerHTML="";
+        //alert("true");
+        return true;
+    }
+}
+
+function checkValidation(){
+    if(idCheck()&&checkfName()&&checklName()&&checkDate()&&checkEmail()&&checkMobile()&&checkPassword()&&checkPassId()&&genderCheck()) {
+        document.getElementById('submit_error').innerHTML="";
+        document.getElementById("signup").submit();
+    }
+    else{
+       // alert(checkPassId());
+        document.getElementById('submit_error').innerHTML=" * Please check your details";
+
+    }
+}
